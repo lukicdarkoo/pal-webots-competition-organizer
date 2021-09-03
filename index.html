@@ -12,15 +12,15 @@
         let animationDisplayed = false;
 
         function showWorld(filename) {
-          if (!webotsAnimation)
-            return;
+            if (!webotsAnimation)
+                return;
 
-          if(webotsAnimation.active())
-            webotsAnimation.close();
+            if (webotsAnimation.active())
+                webotsAnimation.close();
 
-          animationDisplayed = true;
-          webotsAnimation.setNames(filename);
-          webotsAnimation.play();
+            animationDisplayed = true;
+            webotsAnimation.setNames(filename);
+            webotsAnimation.play();
         }
 
         function getCompetitorNode(competitor) {
@@ -42,7 +42,7 @@
             //const title = `Leader Board`;
             //document.title = title;
             //document.getElementById('title').innerHTML = title;
-            
+
             // Time
             const d = new Date(0);
             d.setUTCSeconds(results.timestamp);
@@ -77,62 +77,61 @@
                 `;
                 rawNode.appendChild(resultNode);
                 resultNode.addEventListener('click', (event) => {
-                resultNode.addEventListener('click', (event) => {
-                  if(!webotsAnimation)
-                    webotsAnimation = document.getElementsByTagName('webots-animation')[0];
-	          webotsAnimation.style.visibility = 'visible';
-	          document.getElementById('overlay').style.visibility = 'visible';
-	          showWorld(match.id);
+                    if (!webotsAnimation)
+                        webotsAnimation = document.getElementsByTagName('webots-animation')[0];
+                    webotsAnimation.style.visibility = 'visible';
+                    document.getElementById('overlay').style.visibility = 'visible';
+                    showWorld(match.id);
                 });
 
                 matchesNode.appendChild(rawNode);
             }
         }
 
-	function hideAnimation() {
-          if (!webotsAnimation || !animationDisplayed)
-            return;
+        function hideAnimation() {
+            if (!webotsAnimation || !animationDisplayed)
+                return;
 
-          webotsAnimation.close()
-          webotsAnimation.style.visibility = 'hidden';
-          document.getElementById('overlay').style.visibility = 'hidden';
-          animationDisplayed = false;
+            webotsAnimation.close()
+            webotsAnimation.style.visibility = 'hidden';
+            document.getElementById('overlay').style.visibility = 'hidden';
+            animationDisplayed = false;
         }
-					    
+
         function loadResults() {
             return fetch('results.json', {
                 method: 'get'
             }).then(response => response.json())
         }
 
-	// Detect if we clicked outside of the animation player
+        // Detect if we clicked outside of the animation player
         document.addEventListener("click", (evt) => {
-          if(!webotsAnimation)
-            return;
-          let targetEl = evt.target;
-          do {
-            if(targetEl == webotsAnimation || targetEl.className === 'item') {
-              // This is a click inside, does nothing, just return.
-              return;
-            }
-            // Go up the DOM
-            targetEl = targetEl.parentNode;
-          } while (targetEl);
-          // This is a click outside.
-          hideAnimation();
+            if (!webotsAnimation)
+                return;
+            let targetEl = evt.target;
+            do {
+                if (targetEl == webotsAnimation || targetEl.className === 'item') {
+                    // This is a click inside, does nothing, just return.
+                    return;
+                }
+                // Go up the DOM
+                targetEl = targetEl.parentNode;
+            } while (targetEl);
+            // This is a click outside.
+            hideAnimation();
         });
 
         window.addEventListener("resize", () => {
-          if (document.body.clientWidth < 800){
-            document.getElementsByTagName('webots-animation')[0].style.width = "100%";
-            document.getElementsByTagName('webots-animation')[0].style.left = "0%";
-          }
-          else {
-            document.getElementsByTagName('webots-animation')[0].style.width = "80%";
-            document.getElementsByTagName('webots-animation')[0].style.left = "10%";
-          }
+            if (document.body.clientWidth < 800) {
+                document.getElementsByTagName('webots-animation')[0].style.width = "100%";
+                document.getElementsByTagName('webots-animation')[0].style.left = "0%";
+            }
+            else {
+                document.getElementsByTagName('webots-animation')[0].style.width = "80%";
+                document.getElementsByTagName('webots-animation')[0].style.left = "10%";
+            }
         })
-		    
+
         window.addEventListener('load', init, false);
     </script>
 
@@ -160,7 +159,8 @@
             text-decoration: underline;
         }
 
-        h1, h2 {
+        h1,
+        h2 {
             text-align: center;
         }
 
@@ -168,16 +168,16 @@
             text-align: left;
         }
 
-	webots-animation {
-          z-index: 2;
-          position: absolute;
-          height: 80%;
-          width: 80%;
-          top: 10%;
-          left: 10%;
-          visibility: hidden;
+        webots-animation {
+            z-index: 2;
+            position: absolute;
+            height: 80%;
+            width: 80%;
+            top: 10%;
+            left: 10%;
+            visibility: hidden;
         }
-	    
+
         .card {
             display: flex;
             flex-direction: column;
@@ -187,18 +187,18 @@
             flex: 2;
         }
 
-	.overlay {
-          z-index: 1;
-          position: absolute;
-          height: 100%;
-          width: 100%;
-          background-color: rgba(0, 0, 0, 0.6);
-          top: 0%;
-          left: 0%;
-          pointer-events: none;
-          visibility: hidden;
+        .overlay {
+            z-index: 1;
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            top: 0%;
+            left: 0%;
+            pointer-events: none;
+            visibility: hidden;
         }
-	    
+
         #content {
             background-color: #ecf0f1;
             padding: 12px;
@@ -259,7 +259,8 @@
         <h3 style="text-align: center;">
             <a href="https://www.iros2021.org" target=_blank>IROS 2021</a>
             -
-            <a href="https://roboticslab-uc3m.github.io/challenge-iros2021" target=_blank>IROS-RSJ Robotic Challenge for Young Students</a>
+            <a href="https://roboticslab-uc3m.github.io/challenge-iros2021" target=_blank>IROS-RSJ Robotic Challenge for
+                Young Students</a>
         </h3>
         <h1 id="title">🏆 SCOREBOARD 🏆</h1>
         <p class="update">Updated on <span id="timestamp"></span></p>
@@ -269,8 +270,8 @@
             <table id="rankings">
                 <tr>
                     <th>#</th>
-                    <th>competitor  </th>
-		    <th>points</th>
+                    <th>competitor </th>
+                    <th>points</th>
                 </tr>
             </table>
         </div>
@@ -280,7 +281,7 @@
             <div id="matches"></div>
         </div>
     </div>
-	
+
     <webots-animation></webots-animation>
     <div id="overlay" class="overlay"></div>
 </body>
